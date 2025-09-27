@@ -1027,35 +1027,33 @@ export default function CopilotKitPage() {
         </main>
       </div>
       <div className="md:hidden">
-        {/* Mobile Chat Popup - conditionally rendered to avoid duplicate rendering */}
-        {!isDesktop && (
-          <CopilotPopup
-            Header={PopupHeader}
-            labels={{
-              title: "Agent",
-              initial:
-                "👋 Share a brief or ask to extract fields. Changes will sync with the canvas in real time.",
-            }}
-            suggestions={[
-              {
-                title: "Add a Project",
-                message: "Create a new project.",
-              },
-              {
-                title: "Add an Entity",
-                message: "Create a new entity.",
-              },
-              {
-                title: "Add a Note",
-                message: "Create a new note.",
-              },
-              {
-                title: "Add a Chart",
-                message: "Create a new chart.",
-              },
-            ]}
-          />
-        )}
+        {/* Mobile Chat Popup - uses CSS to hide on desktop, no JS condition needed */}
+        <CopilotPopup
+          Header={PopupHeader}
+          labels={{
+            title: "Agent",
+            initial:
+              "👋 Share a brief or ask to extract fields. Changes will sync with the canvas in real time.",
+          }}
+          suggestions={[
+            {
+              title: "Add a Project",
+              message: "Create a new project.",
+            },
+            {
+              title: "Add an Entity",
+              message: "Create a new entity.",
+            },
+            {
+              title: "Add a Note",
+              message: "Create a new note.",
+            },
+            {
+              title: "Add a Chart",
+              message: "Create a new chart.",
+            },
+          ]}
+        />
       </div>
     </div>
   );
