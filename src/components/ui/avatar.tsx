@@ -26,7 +26,7 @@ const AvatarImage = React.forwardRef<
   Omit<React.ComponentProps<typeof Image>, "fill"> & { src: string; alt?: string }
 >(({ className, alt = "", src, ...props }, ref) => (
   <Image
-    ref={ref as any}
+    ref={ref}
     src={src}
     alt={alt}
     fill

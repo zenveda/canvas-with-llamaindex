@@ -2,6 +2,13 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  // Skip type checking during build if environment variable is set
+  typescript: {
+    ignoreBuildErrors: !!process.env.SKIP_TYPE_CHECK,
+  },
+  eslint: {
+    ignoreDuringBuilds: !!process.env.SKIP_TYPE_CHECK,
+  },
   async rewrites() {
     return [
       {
