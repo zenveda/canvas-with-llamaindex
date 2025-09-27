@@ -39,14 +39,14 @@ localPort = 9000
 externalPort = 9000
 
 [[ports]]
-localPort = 41711
-externalPort = 3000
+localPort = 38189
+externalPort = 3001
 
 [[ports]]
-localPort = 43415
-externalPort = 3001
+localPort = 41711
+externalPort = 3000
 
 [deployment]
 deploymentTarget = "vm"
 run = ["npm", "run", "start:production"]
-build = ["bash", "-c", "npm run build && npm run build:agent"]
+build = ["npm", "run", "build"]
