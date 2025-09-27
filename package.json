@@ -6,9 +6,9 @@
     "dev": "concurrently \"npm run dev:ui\" \"npm run dev:agent\" --names ui,agent --prefix-colors blue,green --kill-others",
     "dev:debug": "LOG_LEVEL=debug npm run dev",
     "dev:agent": "cd agent && uv run dev",
-    "dev:ui": "next dev --turbopack",
+    "dev:ui": "next dev --turbopack --port 5000 --hostname 0.0.0.0",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --port 5000 --hostname 0.0.0.0",
     "lint": "next lint",
     "install:agent": "cd agent && uv sync"
   },
