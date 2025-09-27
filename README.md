@@ -93,6 +93,28 @@ bun run dev
 
 This will start both the UI and agent servers concurrently.
 
+## Deploying to Vercel
+
+The Next.js UI can be deployed to Vercel. The Python agent (FastAPI + Uvicorn) should be hosted separately (Render, Fly.io, Railway, etc.) and exposed over HTTPS.
+
+1. Deploy the Python agent somewhere reachable
+   - Run the agent service with `HOST=0.0.0.0` and a public `PORT`
+   - Ensure `OPENAI_API_KEY` is set on the agent host
+   - The agent must expose the `POST /run` endpoint (e.g., `https://your-agent.example.com/run`)
+
+2. Configure Vercel Environment Variables for the UI project
+   - `AGENT_URL` (required): Full URL to the agent's `/run` endpoint, e.g. `https://your-agent.example.com/run`
+   - Optionally, you can also set `LLAMAINDEX_AGENT_URL` (fallback name)
+
+3. Build and deploy
+   - Push to your GitHub repo connected to Vercel
+   - Vercel will run `next build` automatically
+
+Notes
+- The UI does not need the `OPENAI_API_KEY`; only the agent needs it.
+- The API route is configured for serverless via `export const runtime = "nodejs";` and `export const dynamic = "force-dynamic";`.
+- If you see type conflicts around `@ag-ui/*` during build, the repo already avoids cross-package type issues by loosening the agent type on the server route. Ensure `AGENT_URL` is set to a non-local address (not `127.0.0.1`).
+
 ## Getting Started with the Canvas
 
 Once the application is running, you can:
