@@ -43,7 +43,7 @@ export default function CopilotKitPage() {
   const headerOpacity = useTransform(scrollY, [0, headerScrollThreshold], [1, 0]);
   const [headerDisabled, setHeaderDisabled] = useState<boolean>(false);
   const titleInputRef = useRef<HTMLInputElement | null>(null);
-  const descTextareaRef = useRef<HTMLInputElement | null>(null);
+  const descTextareaRef = useRef<HTMLTextAreaElement | null>(null);
   const lastCreationRef = useRef<{ type: CardType; name: string; id: string; ts: number } | null>(null);
   const lastChecklistCreationRef = useRef<Record<string, { text: string; id: string; ts: number }>>({});
   const lastMetricCreationRef = useRef<Record<string, { label: string; value: number | ""; id: string; ts: number }>>({});
@@ -52,8 +52,8 @@ export default function CopilotKitPage() {
     const disable = y >= headerScrollThreshold;
     setHeaderDisabled(disable);
     if (disable) {
-      titleInputRef.current?.blur();
-      descTextareaRef.current?.blur();
+      if (titleInputRef.current) titleInputRef.current.blur();
+      if (descTextareaRef.current) descTextareaRef.current.blur();
     }
   });
 
@@ -161,7 +161,7 @@ export default function CopilotKitPage() {
             className="w-full rounded border px-2 py-1"
             defaultValue={selectedId}
             onChange={(e) => {
-              selectedId = e.target.value;
+              selectedId = e.currentTarget.value;
             }}
           >
             {(items).map((p) => (
@@ -203,7 +203,7 @@ export default function CopilotKitPage() {
             className="w-full rounded border px-2 py-1"
             defaultValue=""
             onChange={(e) => {
-              selected = e.target.value as CardType;
+              selected = e.currentTarget.value as CardType;
             }}
           >
             <option value="" disabled>Select an item type…</option>
@@ -924,7 +924,7 @@ export default function CopilotKitPage() {
                     disabled={headerDisabled}
                     value={viewState?.globalTitle ?? initialState.globalTitle}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setState((prev) => ({ ...(prev ?? initialState), globalTitle: e.target.value }))
+                      setState((prev) => ({ ...(prev ?? initialState), globalTitle: e.currentTarget.value }))
                     }
                     placeholder="Canvas title..."
                     className={cn(titleClasses, "text-2xl font-semibold")}
@@ -934,7 +934,7 @@ export default function CopilotKitPage() {
                     disabled={headerDisabled}
                     value={viewState?.globalDescription ?? initialState.globalDescription}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setState((prev) => ({ ...(prev ?? initialState), globalDescription: e.target.value }))
+                      setState((prev) => ({ ...(prev ?? initialState), globalDescription: e.currentTarget.value }))
                     }
                     placeholder="Canvas description..."
                     className={cn(titleClasses, "mt-2 text-sm leading-6 resize-none overflow-hidden")}
