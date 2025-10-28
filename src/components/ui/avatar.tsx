@@ -8,7 +8,7 @@ import Image from "next/image"
 const Avatar = React.forwardRef<
   React.ElementRef<"span">,
   React.ComponentPropsWithoutRef<"span">
->(({ className, ...props }, ref) => (
+>(({ className, ...props }: React.ComponentPropsWithoutRef<"span">, ref: React.Ref<React.ElementRef<"span">>) => (
   <span
     ref={ref}
     data-slot="avatar"
@@ -24,7 +24,7 @@ Avatar.displayName = "Avatar"
 const AvatarImage = React.forwardRef<
   React.ElementRef<typeof Image>,
   Omit<React.ComponentProps<typeof Image>, "fill"> & { src: string; alt?: string }
->(({ className, alt = "", src, ...props }, ref) => (
+>(({ className, alt = "", src, ...props }: Omit<React.ComponentProps<typeof Image>, "fill"> & { src: string; alt?: string }, ref: React.Ref<React.ElementRef<typeof Image>>) => (
   <Image
     ref={ref}
     src={src}
@@ -40,7 +40,7 @@ AvatarImage.displayName = "AvatarImage"
 const AvatarFallback = React.forwardRef<
   React.ElementRef<"span">,
   React.ComponentPropsWithoutRef<"span">
->(({ className, ...props }, ref) => (
+>(({ className, ...props }: React.ComponentPropsWithoutRef<"span">, ref: React.Ref<React.ElementRef<"span">>) => (
   <span
     ref={ref}
     className={cn(
